@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block title %}Create New Account{% endblock %}
+
+{% block body_block %}
+{% if registered %}
+  <div class="alert alert-success">
+    Account Created Successfully! <a href="{% url 'App_Login:signin' %}">Login Here</a>
+  </div>
+{% else %}
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <h2 class="text-center">Create New Account</h2>
+            <form method="post" id="registrationForm">
+              {% csrf_token %}
+              {% for fm in form %}
+                <div class="form-group">
+                  {{ fm.label_tag }}
+                  {{ fm|as_crispy_field }}
+                  <small class="text-danger">{{ fm.errors|striptags }}</small>
+                </div>
+              {% endfor %}
+              <div class="form-group">
+                <button class="btn btn-primary btn-block" type="submit">Create Account</button>
+              </div>
+            </form>
+            <p class="text-center">Already have an account? <a href="{% url 'App_Login:signin' %}">Login Here</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endif %}
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+  // JavaScript code for form validation and customization
+  document.getElementById('registrationForm').addEventListener('submit', function(event) {
+    // Validate the form fields here if needed
+    // Example: check if passwords match, validate email, etc.
+
+    // Prevent form submission if validation fails
+    // Uncomment the following line to enable form validation
+    // event.preventDefault();
+  });
+
+  // Hide the default help text and password validation messages
+  const helpTextElements = document.querySelectorAll('.form-group small');
+  helpTextElements.forEach(function(element) {
+    const helpText = element.innerText.toLowerCase();
+    if (helpText.includes('password') || helpText.includes('numeric')) {
+      element.style.display = 'none';
+    }
+  });
+</script>
+{% endblock %}

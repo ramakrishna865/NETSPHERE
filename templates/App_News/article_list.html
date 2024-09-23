@@ -1,0 +1,427 @@
+{% comment %} <!DOCTYPE html>
+<html>
+<head>
+    <title>News Articles</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Open Sans";
+}
+
+body {
+  background-color: #c9cfce;
+}
+
+.content-wrapper {
+  margin: 0 auto;
+  max-width: 1200px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  padding: 0.5rem;
+}
+
+.news-card {
+  border: 0px solid aqua;
+  margin: 0.5rem;
+  position: relative;
+  height: 12rem;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  flex: 1;
+  min-width: 290px;
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+}
+
+.news-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0) linear-gradient(to bottom, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.7) 80%);
+  z-index: 0;
+}
+
+.news-card__card-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.news-card__image {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transition: transform 3s ease;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  position: relative;
+  z-index: -1;
+}
+
+.news-card__text-wrapper {
+  position: absolute;
+  bottom: 0rem;
+  padding: 1rem;
+  color: white;
+  transition: background-color 1.5s ease;
+}
+
+.news-card__title {
+  transition: color 1s ease;
+  margin-bottom: 0.5rem;
+}
+
+.news-card__post-date {
+  font-size: 0.7rem;
+  margin-bottom: 0.5rem;
+  color: #CCC;
+}
+
+.news-card__details-wrapper {
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 1.5s ease, opacity 1s ease;
+}
+
+.news-card__excerpt {
+  font-weight: 300;
+}
+
+.news-card__read-more {
+  background: black;
+  color: #bbb;
+  display: block;
+  padding: 0.4rem 0.6rem;
+  border-radius: 0.3rem;
+  margin-top: 1rem;
+  border: 1px solid #444;
+  font-size: 0.8rem;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  text-decoration: none;
+  width: 7rem;
+  margin-left: auto;
+  position: relative;
+  z-index: 5;
+}
+
+.news-card__read-more i {
+  position: relative;
+  left: 0.2rem;
+  color: #d2f4f4;
+  transition: left 0.5s ease, color 0.6s ease;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.news-card:hover .news-card__details-wrapper {
+  max-height: 20rem;
+  opacity: 1;
+}
+
+.news-card:hover .news-card__text-wrapper {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.news-card:hover .news-card__title {
+  color: rgb(131, 239, 211);
+}
+
+.news-card:hover .news-card__image {
+  transform: scale(1.2);
+  z-index: -1;
+}
+
+.news-card:hover .news-card__read-more i {
+  left: 0.5rem;
+  color: rgb(89, 198, 198);
+}
+    </style>
+</head>
+<body>
+    <h1>News Articles</h1>
+    <div class="content-wrapper">
+        
+            {% for article in articles %}
+
+        <!-- News card markup goes here -->
+        <div class="news-card">
+            <a href="#" class="news-card__card-link"></a>
+            <img src="https://images.pexels.com/photos/127513/pexels-photo-127513.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" alt="" class="news-card__image">
+            <div class="news-card__text-wrapper">
+              <h2 class="news-card__title"><a href="{% url 'App_News:article_detail' pk=article.pk %}">{{ article.title }}</a></h2>
+              <div class="news-card__post-date">{{ article.published_date }}</div>
+              <div class="news-card__details-wrapper">
+                <p class="news-card__excerpt">{{ article.content }}</p>
+                <a href="#" class="news-card__read-more">Read more <i class="fas fa-long-arrow-alt-right"></i></a>
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="news-card">
+            <a href="#" class="news-card__card-link"></a>
+            <img src="React.jpeg" alt="" class="news-card__image">
+            <div class="news-card__text-wrapper">
+              <h2 class="news-card__title"><a href="{% url 'App_News:article_detail' pk=article.pk %}">{{ article.title }}</a></h2>
+              <div class="news-card__post-date">{{ article.published_date }}</div>
+              <div class="news-card__details-wrapper">
+                <p class="news-card__excerpt">{{ article.content }}</p>
+                <a href="#" class="news-card__read-more">Read more <i class="fas fa-long-arrow-alt-right"></i></a>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="news-card">
+            <a href="#" class="news-card__card-link"></a>
+            <img src="security.jpg" alt="" class="news-card__image">
+            <div class="news-card__text-wrapper">
+              <h2 class="news-card__title"><a href="{% url 'App_News:article_detail' pk=article.pk %}">{{ article.title }}</a></h2>
+              <div class="news-card__post-date">{{ article.published_date }}</div>
+              <div class="news-card__details-wrapper">
+                <p class="news-card__excerpt">{{ article.content }}</p>
+                <a href="#" class="news-card__read-more">Read more <i class="fas fa-long-arrow-alt-right"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="news-card">
+            <a href="#" class="news-card__card-link"></a>
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhTH6f2BHcO7n8XFt3KUR3jSOXSR4l6zGod7JjbKfYxGtKk8vGhzCbsmix9bWusmguVh8w91H1kO5aYIXndUHCpp9iE98LJFjphPlyCl816L3tamCB7kotZ1yCksnbgYpi0uQdk7dqlOOrOvO0CBUsOGt3Q_9yRRuZ6PmIwA940V_r-6rLJKNPbUIWJwA/s16000/Google%20CTF.webp" class="news-card__image">
+            <div class="news-card__text-wrapper">
+              <h2 class="news-card__title"><a href="{% url 'App_News:article_detail' pk=article.pk %}">{{ article.title }}</a></h2>
+              <div class="news-card__post-date">{{ article.published_date }}</div>
+              <div class="news-card__details-wrapper">
+                <p class="news-card__excerpt">{{ article.content }}</p>
+                <a href="#" class="news-card__read-more">Read more <i class="fas fa-long-arrow-alt-right"></i></a>
+              </div>
+            </div>
+          </div>
+       
+       
+       
+         
+          {% empty %}
+          <li>No articles available.</li>
+      {% endfor %}
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+</body>
+</html> {% endcomment %}
+
+
+{% comment %} new version {% endcomment %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>News Articles</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+      
+        * {
+          box-sizing: border-box;
+          margin: 0;
+          padding: 0;
+          font-family: "Open Sans";
+        }
+        
+        body {
+          background-color: #c9cfce;
+        }
+        
+        .content-wrapper {
+          margin: 0 auto;
+          max-width: 1200px;
+          display: flex;
+          flex-flow: row wrap;
+          justify-content: center;
+          padding: 0.5rem;
+        }
+        
+        .news-card {
+          border: 0px solid aqua;
+          margin: 0.5rem;
+          position: relative;
+          height: 12rem;
+          overflow: hidden;
+          border-radius: 0.5rem;
+          flex: 1;
+          min-width: 290px;
+          box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+          -webkit-backface-visibility: hidden;
+          -moz-backface-visibility: hidden;
+          -webkit-transform: translate3d(0, 0, 0);
+          -moz-transform: translate3d(0, 0, 0);
+        }
+        
+        .news-card::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0) linear-gradient(to bottom, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.7) 80%);
+          z-index: 0;
+        }
+        
+        .news-card__card-link {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          z-index: 1;
+        }
+        
+        .news-card__image {
+          width: 100%;
+          height: 100%;
+          display: block;
+          object-fit: cover;
+          transition: transform 3s ease;
+          -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+          position: relative;
+          z-index: -1;
+        }
+        
+        .news-card__text-wrapper {
+          position: absolute;
+          bottom: 0rem;
+          padding: 1rem;
+          color: white;
+          transition: background-color 1.5s ease;
+        }
+        
+        .news-card__title {
+          transition: color 1s ease;
+          margin-bottom: 0.5rem;
+        }
+        
+        .news-card__post-date {
+          font-size: 0.7rem;
+          margin-bottom: 0.5rem;
+          color: #CCC;
+        }
+        
+        .news-card__details-wrapper {
+          max-height: 0;
+          opacity: 0;
+          transition: max-height 1.5s ease, opacity 1s ease;
+        }
+        
+        .news-card__excerpt {
+          font-weight: 300;
+        }
+        
+        .news-card__read-more {
+          background: black;
+          color: #bbb;
+          display: block;
+          padding: 0.4rem 0.6rem;
+          border-radius: 0.3rem;
+          margin-top: 1rem;
+          border: 1px solid #444;
+          font-size: 0.8rem;
+          -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+          text-decoration: none;
+          width: 7rem;
+          margin-left: auto;
+          position: relative;
+          z-index: 5;
+        }
+        
+        .news-card__read-more i {
+          position: relative;
+          left: 0.2rem;
+          color: #d2f4f4;
+          transition: left 0.5s ease, color 0.6s ease;
+          -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+        }
+        
+        .news-card:hover .news-card__details-wrapper {
+          max-height: 20rem;
+          opacity: 1;
+        }
+        
+        .news-card:hover .news-card__text-wrapper {
+          background-color: rgba(0, 0, 0, 0.6);
+        }
+        
+        .news-card:hover .news-card__title {
+          color: rgb(131, 239, 211);
+        }
+        
+        .news-card:hover .news-card__image {
+          transform: scale(1.2);
+          z-index: -1;
+        }
+        
+        .news-card:hover .news-card__read-more i {
+          left: 0.5rem;
+          color: rgb(89, 198, 198);
+        }
+    </style>
+</head>
+<body>
+    <h1>News Articles</h1>
+    <div class="content-wrapper">
+        {% if articles %}
+            {% with article=articles.first %}
+                <!-- News card markup goes here -->
+                <div class="news-card">
+                    <a href="#" class="news-card__card-link"></a>
+                    <img src="https://images.pexels.com/photos/127513/pexels-photo-127513.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" alt="" class="news-card__image">
+                    <div class="news-card__text-wrapper">
+                        <h2 class="news-card__title"><a href="{% url 'App_News:article_detail' pk=article.pk %}">{{ article.title }}</a></h2>
+                        <div class="news-card__post-date">{{ article.published_date }}</div>
+                        <div class="news-card__details-wrapper">
+                            <p class="news-card__excerpt">{{ article.content }}</p>
+                            <a href="#" class="news-card__read-more">Read more <i class="fas fa-long-arrow-alt-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="news-card">
+                  <a href="#" class="news-card__card-link"></a>
+                  <img src="https://static1.xdaimages.com/wordpress/wp-content/uploads/2023/06/apple-products.jpg?q=50&fit=contain&w=1140&h=&dpr=1.5" alt="" class="news-card__image">
+                  <div class="news-card__text-wrapper">
+                      <h2 class="news-card__title"><a href="#">Apple reportedly working on a 30-inch iMac, Apple Watch Ultra 2, and more over the next year</a></h2>
+                      <div class="news-card__post-date">{{ article.published_date }}</div>
+                      <div class="news-card__details-wrapper">
+                          <p class="news-card__excerpt">MacBooks are always among the best laptops you can buy at any price, and Apple is expected to refresh its MacBook Pro lineup with the M3 chip in the coming months. That's according to Bloomberg's Mark Gurman, who says that the company is developing an M3 13-inch MacBook Pro under the codename J504, as well as 14-inch and 16-inch MacBook Pros (codenamed J514 and J516) powered by the M3 Pro and M3 Max.</p>
+                          <a href="#" class="news-card__read-more">Read more <i class="fas fa-long-arrow-alt-right"></i></a>
+                      </div>
+                  </div>
+              </div>
+
+            {% endwith %}
+        {% else %}
+            <p>No articles available.</p>
+        {% endif %}
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+</body>
+</html>

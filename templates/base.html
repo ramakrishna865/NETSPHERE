@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+
+  <style>
+    
+    .btn-5 {
+      background: #f0f3f3;
+      line-height: 42px;
+      padding: 0;
+      border: none;
+    }
+
+    .btn-5:hover {
+      background: transparent;
+      color: #d4e2e3;
+    }
+
+    .btn-5:before,
+    .btn-5:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 2px;
+      background: hsl(190, 78%, 62%);
+      width: 0;
+      box-shadow: 0 0 5px #69c3dd, 0 0 5px #98ebec inset;
+      transition: 400ms ease all;
+    }
+
+    .btn-5:after {
+      right: inherit;
+      top: inherit;
+      left: 0;
+      bottom: 0;
+    }
+
+    .btn-5:hover:before,
+    .btn-5:hover:after {
+      width: 100%;
+      transition: 800ms ease all;
+    }
+
+    /* CSS for the neon button */
+    
+  </style>
+
+  <title>
+    {% block title  %}
+    Blogs Page
+    {% endblock %}
+  </title>
+</head>
+
+<body>
+  {% load static %}
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top nav-tabs ">
+    <div class="container px-0 px-lg-3">
+      <a class="navbar-brand" href="{% url 'index' %}">
+        <a class="btn-5"><span class="font-weight-bold text-uppercase text-primary">NetSphere</span></a>
+      </a>
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item {% if request.path == '/' %}active{% endif %}">
+            <a class="btn-5"> <a class="btn-5 text-success" href="{% url 'index' %}">Home</a></a>
+          </li>
+
+          {% if request.user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'App_Blog:create_blog' %}">Write Blog</a>
+          </li>
+          <li class="nav-item">
+
+            <a class="nav-link" href="{% url 'App_Login:logout' %}">Logout</a>
+          </li>
+          <li class="nav-item">
+
+            <a class="nav-link" href="{% url 'App_News:article_list' %}">Articles</a>
+          </li>
+            
+              <li class="nav-item">
+                <a class="btn-5" href="{% url 'App_DC:home' %}">Discuss Community</a>
+              </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'App_Login:signin' %}">Login</a>
+          </li>
+          <li class="nav-item">
+            <a  style="border-radius:20px;" class="nav-link bg-primary text-white" href="{% url 'App_Login:signup' %}">Create Account</a>
+          </li>
+          {% endif %}
+        </ul>
+
+        {% if user.is_authenticated %}
+        <div class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle text-primary" href="#" id="navbardrop" data-toggle="dropdown"  >
+            {{ user.username }}
+          </a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="{% url 'App_Blog:my_blogs' %}">My Blogs</a>
+            <hr class="dropdown-divider">
+            <a class="dropdown-item" href="{% url 'App_Login:profile' %}">Your Profile</a>
+            <hr class="dropdown-divider">
+            <a class="dropdown-item" href="{% url 'App_Login:logout' %}">Logout</a>
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </nav>
+
+  <div class="container" style="padding-top: 20px;">
+    {% block body_block %}
+    {% endblock %}
+  </div>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+    integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+    integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

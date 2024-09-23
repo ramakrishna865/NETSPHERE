@@ -1,0 +1,72 @@
+<head>
+    <style>
+        form {
+            border: 4px solid transparent;
+            margin: 0 auto;
+            padding: 40px;
+            width: fit-content;
+            transition: border-color 0.3s ease-in-out;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        form:hover {
+            border-color: #00ff00;
+        }
+
+        form input[type="text"],
+        form textarea {
+            border: 2px solid #00ff00;
+            border-radius: 4px;
+            padding: 8px;
+            transition: border-color 0.3s ease-in-out;
+            width: 100%;
+            box-sizing: border-box;
+            margin-bottom: 12px;
+            font-size: 14px;
+            background-color: transparent;
+            color: #fff;
+        }
+
+        form input[type="text"]:focus,
+        form textarea:focus {
+            border-color: #00ff00;
+            box-shadow: 0 0 5px #00ff00;
+        }
+
+        form input[type="text"]:hover,
+        form textarea:hover {
+            border-color: #00ff00;
+        }
+
+        form input[type="submit"] {
+            background-color: #00ff00;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            margin: 4px 2px;
+            cursor: pointer;
+            transition-duration: 0.4s;
+            border-radius: 4px;
+        }
+
+        form input[type="submit"]:hover {
+            background-color: #008000;
+        }
+    </style>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+</head>
+    </style>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+</head>
+
+<form action="{% url 'App_DC:addInDiscussion' %}" method="POST" class="container mt-4">
+    {% csrf_token %}
+    <div class="form-group">
+        {{ form.as_p }}
+    </div>
+    <button type="submit" class="btn btn-success">Submit</button>
+</form>

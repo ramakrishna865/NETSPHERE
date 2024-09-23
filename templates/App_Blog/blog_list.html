@@ -1,0 +1,146 @@
+{% extends 'base.html' %}
+
+{% load custom_filters %}
+{% block title %} Home {% endblock %}
+
+{% block body_block %}
+<style>
+
+
+.card-body {
+
+font-weight: bold;
+font-weight: 500;
+
+
+}
+
+
+
+  .container-bg {
+    background-color: fff;
+  }
+  
+.card {
+
+  border-radius: 20px;
+
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  color: #111;
+  background-color: #f7f7f7;
+ 
+  border: 1px solid #ddd;
+  padding: 3px 10px;
+  position: relative;
+  margin-bottom: 20px;
+  transition: 0.3s;
+  opacity: 0; /* Set initial opacity to 0 */
+  transform: translateY(50px); /* Move the card down */
+  transition: opacity 0.5s ease, transform 0.5s ease; /* Apply transition effect */
+
+}
+
+.card.show {
+  opacity: 1; /* When the card is visible, set opacity to 1 */
+  transform: translateY(0); /* Move the card back to its original position */
+}
+
+.card img {
+  width: 90%;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.card:hover {
+  transform: scale(1.01);
+  filter: brightness(120%); /* Increase brightness on hover */
+  border-color:gray;
+}
+
+.card:hover  {
+  filter: brightness(100%); /* Reset brightness on card body */
+}
+
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background-color: #f8f9fa;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.card-text{
+  
+  font-weight: bold;
+}
+.container .card  a:hover {
+  color: green;
+}
+
+  
+</style>
+<script>
+  // Function to add animation class to each card on page load
+  function showCards() {
+    const cards = document.querySelectorAll('.card');
+    cards.forEach((card, index) => {
+      setTimeout(() => {
+        card.classList.add('show');
+      }, index * 200); // Adjust the delay time (200ms) to control the animation speed
+    });
+  }
+
+  // Wait for the page to load, then trigger the animation
+  window.addEventListener('load', showCards);
+</script>
+
+
+<div class="container">
+  <div class="section">
+  <div class="row">
+    {% for blog in blogs %}
+    <div class="col-12">
+      <div class="card bg-white">
+        <div class="row">
+          <div class="col-md-6">
+            <img src="/media/{{ blog.blog_image }}" alt="{{ blog.blog_title }}" title="{{ blog.blog_title }}" class="card-img-top">
+          </div>
+          <div class="col-md-6">
+            <div class="card-body">
+              <h2 class="card-title">{{ blog.blog_title }}</h2>
+              <h6 class="card-subtitle mb-2 text-muted"><i>{{ blog.publish_date }}</i></h6>
+              <p class="card-text">{{ blog.blog_content|range_filter|linebreaks }}</p>
+              <a href="{% url 'App_Blog:blog_details' slug=blog.slug %}" class="btn btn-primary">Read More</a>
+              <div class="card-footer">
+                <h6 class="card-subtitle mt-3">Posted By: <a href="#">{{ blog.author }}</a></h6>
+                <h6 class="card-subtitle">{{ blog.liked_blog.count }} Likes | {{ blog.blog_comment.count }} Comments</h6>
+                <div class="share-buttons">
+                  <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}{{ blog.get_absolute_url }}" target="_blank" rel="noopener">
+                    <i class="fab fa-facebook"></i>
+                  </a>
+                  <a href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri }}{{ blog.get_absolute_url }}" target="_blank" rel="noopener">
+                    <i class="fab fa-twitter"></i>
+                  </a>
+                  <!-- Add more share buttons for other platforms as desired -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+</div>
+{% endblock %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
